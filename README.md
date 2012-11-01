@@ -1,9 +1,6 @@
 # Ride 
 ### [built on HTML5 Blank](http://html5blank.com)
 
-* [html5blank.com](http://html5blank.com)
-
-
 ##Template Files
 * Front page template - home.php
 * Custom Post Types - inc/post_types.php
