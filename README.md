@@ -1,4 +1,5 @@
-# [Ride built on HTML5 Blank](http://html5blank.com)
+# Ride 
+### [built on HTML5 Blank](http://html5blank.com)
 
 * [html5blank.com](http://html5blank.com)
 
@@ -7,7 +8,7 @@
 * Front page template - home.php
 * Custom Post Types - inc/post_types.php
 * Meta-Box Config - inc/meta-box-config.php
-** [Meta-box documentation](http://www.deluxeblogtips.com/meta-box/)
+* - [Meta-box documentation](http://www.deluxeblogtips.com/meta-box/)
 
 ### Preloaded Functions (functions.php)
 * Enqueue Scripts functions setup
