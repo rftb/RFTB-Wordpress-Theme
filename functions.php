@@ -12,6 +12,7 @@
  */
 
 define('THEMEDIR', dirname( get_bloginfo('stylesheet_url')).'/');
+define('SITEURL', dirname( get_bloginfo('siteurl')).'/');
 
 // Re-define meta box path and URL
 include('inc/post_types.php');
@@ -125,7 +126,7 @@ function html5blank_scripts()
         wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true); // HTML5 Blank script with version number
         wp_enqueue_script('html5blankscripts'); // Enqueue it!
 
-        wp_register_script('plugins', get_template_directory_uri() . '/js/plugins.js', array('jquery'), '1.0.0', true); // HTML5 Blank script with version number
+        wp_register_script('plugins', THEMEDIR . '/js/plugins.js', array('jquery'), '1.0.0', true); // HTML5 Blank script with version number
         wp_enqueue_script('plugins'); // Enqueue it!
     }
 }
