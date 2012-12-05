@@ -1,2 +1,10 @@
 #welcome-panel 
 { display: none;}
+
+
+#adminLogo {
+  position: absolute;
+  right: -84px;
+  top: 35px;
+  height: 50px;
+}

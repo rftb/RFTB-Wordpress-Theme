@@ -225,6 +225,9 @@ function html5blank_styles()
     wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
     wp_enqueue_style('html5blank'); // Enqueue it!
 
+    wp_register_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1.0', 'all');
+    wp_enqueue_style('bootstrap'); // Enqueue it!
+
     wp_register_style('mainCSS', get_template_directory_uri() . '/css/main.css', array(), '1.0', 'all');
     wp_enqueue_style('mainCSS'); // Enqueue it!
 }
@@ -375,7 +378,8 @@ function remove_admin_bar()
 
     // Add Admin Notes for front page
     function ride_admin_notice()
-    {  echo is_page('dashboard'); ?>
+    {  ?>
+        <img src="http://ride.framework/wp-content/themes/ride/img/logo.png" alt="Logo" id="adminLogo">
         <h2>Admin Header Area</h2>
 
 

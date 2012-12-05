@@ -29,13 +29,13 @@
 
 @mixin breakpoint($point) {
   @if $point == papa-bear {
-    @media (max-width: 1600px) { @content; }
+    @media (min-width: 1600px) { @content; }
   }
   @if $point == mama-bear {
-    @media (max-width: 1250px) { @content; }
+    @media (min-width: 1024px) { @content; }
   }
   @else if $point == baby-bear {
-    @media (max-width: 650px)  { @content; }
+    @media (min-width: 650px)  { @content; }
   }
 }
 		/* -- usage ---
@@ -52,7 +52,8 @@
    ========================================================================== */
 
 	article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, div, ul {display:block; box-sizing: border-box;}
-	audio, canvas, video {display:inline-block;*display:inline;*zoom:1;}
+	footer, .clearfix {clear: both;}
+  audio, canvas, video {display:inline-block;*display:inline;*zoom:1;}
 	audio:not([controls]) {display:none;}
 	[hidden] {display:none;}
 	
@@ -123,5 +124,20 @@
    Main Styles
    ========================================================================== */
 
-.wrapper { padding: 26px; }
+.wrapper { padding: 26px; 
+      @include breakpoint(mama-bear) { max-width: 1000px; margin: 0 auto; }
+
+}
+
+
+section { // this is the main section
+      @include breakpoint(papa-bear) { width: 60%; float: left; }
+      @include breakpoint(mama-bear) { width: 60%; float: left; }
+}
+
+
+aside { // this is the sidebar
+      @include breakpoint(papa-bear) { width: 35%; float: right; }
+      @include breakpoint(mama-bear) { width: 35%; float: right; }
+}
 
