@@ -1,6 +1,2 @@
- #menu-posts-drink_item a img
-,#menu-posts-food_item a img
- {
-  width: 28px;
-  height: 28px;
-}
+#welcome-panel 
+{ display: none;}
