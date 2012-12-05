@@ -14,14 +14,8 @@
 define('THEMEDIR', dirname( get_bloginfo('stylesheet_url')).'/');
 define('SITEURL', dirname( get_bloginfo('siteurl')).'/');
 
-// Re-define meta box path and URL
 include('inc/post_types.php');
-define( 'RWMB_URL', trailingslashit( get_stylesheet_directory_uri() . '/inc/meta-box' ) );
-define( 'RWMB_DIR', trailingslashit( STYLESHEETPATH . '/inc/meta-box' ) );
-// Include the meta box script
-require_once RWMB_DIR . 'meta-box.php';
-// Include the meta box definition (the file where you define meta boxes, see `demo/demo.php`)
-include 'inc/meta-box-config.php';
+
 
 /*
  * ========================================================================
