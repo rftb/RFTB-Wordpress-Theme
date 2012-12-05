@@ -11,8 +11,9 @@
  * ========================================================================
  */
 
+
 define('THEMEDIR', dirname( get_bloginfo('stylesheet_url')).'/');
-define('SITEURL', dirname( get_bloginfo('siteurl')).'/');
+define('SITEURL', dirname( get_bloginfo('url')).'/');
 
 include('inc/post_types.php');
 
@@ -371,6 +372,46 @@ function remove_admin_bar()
        wp_enqueue_style( 'admin-style' ); // Enqueue it!
    }   add_action( 'admin_init', 'admin_styles' );
 
+
+    // Add Admin Notes for front page
+    function ride_admin_notice()
+    {  echo is_page('dashboard'); ?>
+        <h2>Admin Header Area</h2>
+
+
+<?php   return null;
+    }
+
+
+// example custom dashboard widget
+function dash_widget_plugin_list() { ?>
+    <ul>
+        <li><a href='update.php?action=install-plugin&plugin=meta-box&_wpnonce=0523b70e19'>Meta-box </a></li>
+        <li><a href='update.php?action=install-plugin&plugin=tinymce-advanced&_wpnonce=b92afb72fc'>TimyMCE Advanced </a></li>
+        <li><a href='update.php?action=install-plugin&plugin=contact-form-7&_wpnonce=71f3c9377f'>Contact Form 7 </a></li>
+        <li><a href='update.php?action=install-plugin&plugin=members-only&_wpnonce=1fe93a55d5'>Members Only</a></li>
+        <li><a href='update.php?action=install-plugin&plugin=wp-smtp&_wpnonce=9d61e0e4e3'>SMTP</a></li>
+    </ul>
+<?php
+}
+function add_custom_dashboard_widget() {
+    wp_add_dashboard_widget('dash_widget_plugin_list', 'Plugins We always Use ', 'dash_widget_plugin_list');
+}
+
+
+// disable default dashboard widgets
+function disable_default_dashboard_widgets() {
+
+    remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');
+    remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');
+    remove_meta_box('dashboard_plugins', 'dashboard', 'core');
+
+    remove_meta_box('dashboard_quick_press', 'dashboard', 'core');
+    remove_meta_box('dashboard_recent_drafts', 'dashboard', 'core');
+    remove_meta_box('dashboard_primary', 'dashboard', 'core');
+    remove_meta_box('dashboard_secondary', 'dashboard', 'core');
+}
+
 // Remove 'text/css' from our enqueued stylesheet
 function html5_style_remove($tag)
 {
@@ -392,25 +433,7 @@ function html5blankgravatar ($avatar_defaults)
     return $avatar_defaults;
 }
 
-// Custom Posts Output Count
-function html5blank_custom_post_count($query)
-{
-    switch ( $query->query_vars['post_type'] )
-    {
-        case 'html5-blank':  // Post Type named 'html5-blank', rename this to your post type
-            $query->query_vars['posts_per_page'] = 30; // Change how many posts are viewed per page
-            break;
 
-        default:
-            break;
-    }
-    return $query;
-}
-
-if( !is_admin() )
-{
-    add_filter('pre_get_posts', 'html5blank_custom_post_count');
-}
 
 
 
@@ -432,6 +455,9 @@ add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
 add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
+add_action('admin_notices', 'ride_admin_notice'); // Add our HTML5 Pagination
+add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
+add_action('admin_menu', 'disable_default_dashboard_widgets');
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -461,7 +487,7 @@ add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove 
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter('excerpt_more', 'html5wp_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
+//add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
