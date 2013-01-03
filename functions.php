@@ -1,6 +1,7 @@
 <?php
 /*
- *  Author: Todd Motto | @toddmotto
+ *  Author: Ride For the Brand | @rideforthebrand & 
+ *  Based On HTML5blank by Todd Motto | @toddmotto
  *  URL: html5blank.com | @html5blank
  *  Custom functions, support, custom post types and more.
  */
@@ -225,9 +226,6 @@ function html5blank_styles()
     wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array(), '1.0', 'all');
     wp_enqueue_style('html5blank'); // Enqueue it!
 
-    wp_register_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1.0', 'all');
-    wp_enqueue_style('bootstrap'); // Enqueue it!
-
     wp_register_style('mainCSS', get_template_directory_uri() . '/css/main.css', array(), '1.0', 'all');
     wp_enqueue_style('mainCSS'); // Enqueue it!
 }
@@ -373,13 +371,17 @@ function remove_admin_bar()
        /* Register our stylesheet. */
        wp_register_style( 'admin-style', get_template_directory_uri() . '/css/admin.css', array(), '1.0', 'all');
        wp_enqueue_style( 'admin-style' ); // Enqueue it!
-   }   add_action( 'admin_init', 'admin_styles' );
+   }    add_action( 'admin_init', 'admin_styles' );
+        add_action( 'login_enqueue_scripts', 'admin_styles' );
 
+function custom_login_logo_url() {
+    return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'custom_login_logo_url' );
 
     // Add Admin Notes for front page
     function ride_admin_notice()
-    {  ?>
-        <img src="http://ride.framework/wp-content/themes/ride/img/logo.png" alt="Logo" id="adminLogo">
+    {  echo is_page('dashboard'); ?>
         <h2>Admin Header Area</h2>
 
 
